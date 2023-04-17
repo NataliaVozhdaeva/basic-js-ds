@@ -23,6 +23,9 @@ const { ListNode } = require('../extensions/list-node.js');
  * }
  */
 function removeKFromList(l, k) {
+  console.dir('init');
+  console.dir(l);
+
   if (l == null) {
     return l;
   }
@@ -31,18 +34,27 @@ function removeKFromList(l, k) {
     l = l.next;
   }
 
-  current = l;
-  next = current.next;
+  thisNode = l;
+  nextNode = thisNode.next;
 
-  while (next != null) {
-    if (next.value == k) {
-      current.next = next.next;
-      if (current.next == null) break;
+  while (nextNode != null) {
+    //console.dir('while start');
+    //console.dir(l);
+    //console.dir(nextNode);
+    if (nextNode.value == k) {
+      thisNode.next = nextNode.next;
+      if (thisNode.next == null) break;
+      if (nextNode.next.value == k) {
+        thisNode.next = nextNode.next.next;
+      }
     }
-    current = current.next;
-    next = current.next;
+    thisNode = thisNode.next;
+    nextNode = thisNode.next;
+    //console.dir('thisNode');
+    // console.dir(thisNode);
   }
-
+  //console.dir('return');
+  // console.dir(l);
   return l;
 }
 
